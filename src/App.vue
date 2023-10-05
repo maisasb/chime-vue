@@ -1,19 +1,26 @@
-<template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
-</template>
+<script setup>
+import { computed, onMounted, ref } from "vue";
+import ChimeMeeting from "./components/ChimeMeeting";
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-import HelloWorld from './components/HelloWorld.vue';
+const meeting = ref(null);
+const attendee = ref(null);
 
-export default defineComponent({
-  name: 'App',
-  components: {
-    HelloWorld
-  }
+const showMeeting = computed(() => meeting.value && attendee.value);
+
+onMounted(() => {
+  meeting.value = {
+    //enter meeting value
+  };
+
+  attendee.value = {
+    //enter attendee value
+  };
 });
 </script>
+
+<template>
+  <ChimeMeeting v-if="showMeeting" :meeting="meeting" :attendee="attendee" />
+</template>
 
 <style>
 #app {
